@@ -1,0 +1,13 @@
+label {
+    color:rgb(9, 160, 9);
+}
+input {
+    color:rgb(9, 160, 9); 
+    background-color: rgb(44, 40, 40); 
+    border-radius: 10px; 
+    border-color: rgb(9, 160, 9);
+}
+.column {
+    display: inline-block;
+    margin: 0 0.6em;
+}
