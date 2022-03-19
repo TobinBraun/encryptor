@@ -8,7 +8,7 @@ function Input(props) {
             <input
                 id="publicKey" 
                 type={props.type ?? "number"}
-                value={props.value} 
+                value={props.value ?? ''} 
                 onChange={e => props.onChange && props.onChange(e.target.value)}
             ></input>
         </div>
