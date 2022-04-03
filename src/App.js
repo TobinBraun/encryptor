@@ -13,9 +13,11 @@ function encrypt(g, p, A, message)
     for (let i = 0; i < message.length; i++)
     {
         encryptedMessage+= "("
-        let k = BigInt(Math.floor(Math.random() * 256))
+        let k = BigInt(8 - (i * 3))
         encryptedMessage+= (BMA.modPow(g, k, p)) + ", "
         encryptedMessage += (BigInt(message.charCodeAt(i)) * BMA.modPow(A, k, p)) % p + ")"
+        console.log("1", BMA.modPow(A, k, p))
+        console.log(A, k, p)
         encryptedMessage += i < message.length - 1 ? " " : ""
     }
     return encryptedMessage
@@ -25,18 +27,17 @@ function decrypt(p, a, message)
 {
   p = BigInt(p)
   a = BigInt(a)
-  let newMessage = ""
+  let decryptedMessage = ""
   message = message.replace(/[(),]/g, "")
   message = message.split(" ")
-  console.log(message)
   message = message.map(num => BigInt(num))
   for(let i = 0; i < message.length; i += 2)
   {
-    newMessage += BMA.modPow(message[i], a, p)
-    newMessage += " "
-    console.log(message[i], a, p, BMA.modPow(message[i], a, p))
+    decryptedMessage += String.fromCharCode(Number((BMA.modInv(BMA.modPow(message[i], a, p), p) * message[i + 1]) % p))
+    console.log(Number((BMA.modInv(BMA.modPow(message[i], a, p), p) * message[i + 1] % p)))
   }
-  console.log(newMessage)
+  console.log(decryptedMessage)
+  return(decryptedMessage)
 }
 
 function App() {
